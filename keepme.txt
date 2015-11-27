@@ -1,0 +1,56 @@
+C:\Data\workspace\ionic>rhc app-create server4 tomcat7
+Using jbossews-2.0 (Tomcat 7 (JBoss EWS 2.0)) for 'tomcat7'
+
+Application Options
+-------------------
+Domain:     famcal
+Cartridges: jbossews-2.0
+Gear Size:  default
+Scaling:    no
+
+Creating application 'server4' ... done
+
+
+Waiting for your DNS name to be available ... done
+
+Cloning into 'server4'...
+The authenticity of host 'server4-famcal.rhcloud.com (107.22.109.136)' can't be established.
+RSA key fingerprint is cf:ee:77:cb:0e:fc:02:d7:72:7e:ae:80:c0:90:88:a7.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'server4-famcal.rhcloud.com,107.22.109.136' (RSA) to the list of known hosts.
+remote: Counting objects: 41, done.
+remote: Compressing objects: 100% (31/31), done.
+remote: Total 41 (delta 2), reused 41 (delta 2)
+Receiving objects: 100% (41/41), 51.25 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (2/2), done.
+Checking connectivity... done.
+
+Your application 'server4' is now available.
+
+  URL:        http://server4-famcal.rhcloud.com/
+  SSH to:     55959e23500446cef9000083@server4-famcal.rhcloud.com
+  Git remote: ssh://55959e23500446cef9000083@server4-famcal.rhcloud.com/~/git/server4.git/
+  Cloned to:  C:/Data/workspace/ionic/server4
+
+Run 'rhc show-app server4' for more details about your app.
+
+C:\Data\workspace\ionic>rhc cartridge-add postgresql-9.2 --app server4
+Adding postgresql-9.2 to application 'server4' ... done
+
+postgresql-9.2 (PostgreSQL 9.2)
+-------------------------------
+  Gears:          Located with jbossews-2.0
+  Connection URL: postgresql://$OPENSHIFT_POSTGRESQL_DB_HOST:$OPENSHIFT_POSTGRESQL_DB_PORT
+  Database Name:  server4
+  Password:       RdEmE5fDaIBH
+  Username:       adminlhbhqf5
+
+PostgreSQL 9.2 database added.  Please make note of these credentials:
+
+   Root User: adminlhbhqf5
+   Root Password: RdEmE5fDaIBH
+   Database Name: server4
+
+Connection URL: postgresql://$OPENSHIFT_POSTGRESQL_DB_HOST:$OPENSHIFT_POSTGRESQL_DB_PORT
+
+C:\Data\workspace\ionic>
