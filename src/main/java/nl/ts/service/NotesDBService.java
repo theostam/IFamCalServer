@@ -22,7 +22,6 @@ public class NotesDBService {
     public Connection getConnection(){
         if (connection == null){
             try {
-                System.out.println("nr 1");
                 InitialContext ic = new InitialContext();
                 Context initialContext = (Context) ic.lookup("java:/comp/env");
                 DataSource datasource = (DataSource) initialContext.lookup("jdbc/PostgreSQLDS");
