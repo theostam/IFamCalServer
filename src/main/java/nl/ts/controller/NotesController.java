@@ -8,6 +8,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,9 +18,25 @@ import java.util.List;
 @Path("/")
 public class NotesController implements Serializable {
 
-@GET
-@Path("notes/lastmodificationdate")
-@Produces( MediaType.APPLICATION_JSON )
+    @POST @Consumes("application/json")
+    @Path("login")
+    @Produces( MediaType.APPLICATION_JSON )
+    public String login(final MyJaxBean input) {
+        System.out.println("request login: "+ "user:"+ input.username);
+
+        if (!AuthenticationService.authenticate(input.username, input.password)){
+            return createJSONresult("invalid username/password");
+        }
+
+        String token = "hashthingy";
+        String response = createJSONresult( token );
+        System.out.println("response: "+ response);
+        return  response;
+    }
+
+    @GET
+    @Path("notes/lastmodificationdate")
+    @Produces( MediaType.APPLICATION_JSON )
     public String getLastModificationDate(@QueryParam("user") String user) {
         System.out.println("request /notes/lastmodificationdate: "+ "user:"+ user);
         if (!AuthenticationService.authenticate(user, null)) return null;
@@ -80,7 +98,23 @@ public class NotesController implements Serializable {
     private String createJSONresult( String result){
 
 //        return callback+" ({'result':" + result + "});";
-        return "{\"result\":" + result + "}";
+        return "{\"result\":" + "\"" + result + "\"" + "}";
+    }
+
+    @XmlRootElement
+    static public class MyJaxBean {
+        @XmlElement public String username;
+        @XmlElement public String password;
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public MyJaxBean(){}
     }
 }
 
